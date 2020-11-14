@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1c1c1c">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="images/diya.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway:wght@800&display=swap" rel="stylesheet">
+    <title>Happy Diwali</title>
+    <style>
+        @font-face {
+            font-family: autography;
+            src: url(FONTS/autography.otf);
+        }
+        @font-face {
+            font-family: proxima;
+            src: url(FONTS/ProximaNova-Regular.ttf);
+        }
+        @font-face {
+            font-family: proxima-bold;
+            src: url(FONTS/ProximaNova-Bold.ttf);
+        }
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: white;
+            opacity: 1; /* Firefox */
+        }
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+            color: white;
+        }
+
+        ::-ms-input-placeholder { /* Microsoft Edge */
+            color: white;
+        }
+        *:focus{
+            outline:none;
+        }
+        body{
+            background-color: #32022e;
+            position: fixed; 
+            overflow-y: scroll;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+        #header{
+            font-family: autography;
+            font-size: 65px;
+            position: absolute;
+			top: 75px;
+			left: 50%;
+			transform: translate(-50%,0);
+            width: 180px;
+            height: 170px;
+            color: white;
+            z-index: 2;
+        }
+        #h{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #d{
+            position: absolute;
+            top: 65px;
+            left: 0;
+        }
+        .ttext{
+            background: transparent;
+        }
+        #bpanel{
+            position: absolute;
+			top: 53%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+            color: inherit;
+            height: 125px;
+            width: 250px;
+        }
+        #nametf{
+            padding: 8px 17px;
+            background: transparent;
+            border: 3px solid white;
+            border-radius: 50px;
+            font-size: 16px;
+            font-family: montserrat;
+            color: white;
+            width: 210px;
+        }        
+        .btn{
+            padding: 8px 17px;
+            background: transparent;
+            border: 4px solid white;
+            border-radius: 50px;
+            font-size: 16px;
+            font-family: raleway;
+            color: white;
+            transform: translate(-50%,0);
+            transition-duration: 0.2s;
+            cursor: pointer;
+            position: absolute;
+        }
+        .btn:hover{
+            background: white;
+            color: inherit;
+        }
+        #gl{                        
+            top: 80px;
+            left: 50%;			
+        }
+        #view{
+            right: -30px;
+            top: 80px;
+            display: none;
+        }
+        #credits{
+            background: #fff;
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            padding: 5px 15px 5px 8px;
+            font-family: montserrat;
+            color: #1c1c1c;
+            border-radius: 0 25px 25px 0;
+        }
+        heart{
+            color: red;
+        }
+        #pop{
+            position: absolute;
+            height: 350px;
+			top: 0px;
+			left: 50%;
+			transform: translate(-50%,0);
+            filter: contrast(200) saturate(0);
+            mix-blend-mode: screen;
+            /* z-index: 3; */
+        }
+        #diya{
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+			transform: translate(-50%,0);
+            height: 120px;
+        }
+        #footer{
+            color: white;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            opacity: 0.6;
+        }
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+        #bg{
+            position: absolute;
+            height: 90%;
+            top: 50px;
+            opacity: 0.6;
+            left: -340px;
+        }
+    </style>
+</head>
+<body>
+    <img src="images/design.png" id="bg">
+    <div id="header">
+        <div class="ttext" id="h">Happy</div>
+        <div class="ttext" id="d">Diwali</div>
+    </div>
+    <div id="bpanel">
+        <input type="text" placeholder="Enter your name" id="nametf">
+        <button id="gl" class="btn">GET LINK</button>
+        <button id="view" class="btn">VIEW</button>
+    </div>
+    <img src="images/diya.png" id="diya">
+    <div id="footer"><a href="https://instagram.com/rise.lpu">Made with <span id="heart">❤</span> by Team RISE</a></div>
+    <script>
+        var btnState = 0;
+        $('#gl').click(function(){
+            if(btnState==0){
+                name = $('#nametf').val();
+                name = name.replace(/ /g,"%20");
+                $('#nametf').val('https://curious-gurbir.github.io/diwali-wish/wish?n='+name);
+                $('#nametf').attr('readonly','true');
+                $(this).html('COPY');
+                $(this).css({'left':'10px','transform':'translate(0,0)'});
+                $('#view').show();
+                btnState = 1;
+            }else{
+                var copyText = document.getElementById("nametf");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+                document.execCommand("copy");
+                alert("Link copied to clipboard!");
+            }            
+        });
+        $('#nametf').click(function(){            
+            if(btnState==1){
+                var copyText = document.getElementById("nametf");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+                document.execCommand("copy");
+                alert("Link copied to clipboard!");
+            }
+        });
+        $('#view').click(function(){
+            url = $('#nametf').val();
+            window.open(url,'_blank');
+        });
+    </script>
+</body>
+</html>
